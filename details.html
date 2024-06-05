@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Document</title>
+    <style>
+        .product-details {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="left">
+            <!--放圖片-->
+            <h1>果果小舖</h1>
+        </div>
+        <nav class="right">
+            <a href="AboutUs.html">關於我們</a>
+            <a href="Fruits.html">商品介紹</a>
+            <a href="Members.html">會員中心</a>
+            <a href="Cart.html">購物車</a>           
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-details">
+            <img class="left" id="productImage" src="" alt="Product Image">
+            <div class="right">
+                <h2 id="productName"></h2>
+                <p id="productDescription"></p>
+                <p id="productPrice"></p>
+            </div>
+        </div>        
+    </main>
+
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const productName = urlParams.get('name');
+        const productDescription = urlParams.get('description');
+        const productPrice = urlParams.get('price');
+        const productImage = urlParams.get('img');
+
+        document.getElementById('productName').innerText = productName;
+        document.getElementById('productDescription').innerText = productDescription;
+        document.getElementById('productPrice').innerText = '售價：$' + productPrice;
+        document.getElementById('productImage').src = './img/' + productImage;
+    </script>
+</body>
+</html>

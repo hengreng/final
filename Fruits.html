@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        hr {
+            border: 1px solid;
+            width: 98%;
+            margin: 0 auto;
+        }
+        
+        .content {
+            width: 100%;
+            margin-top: 10%;
+            height: auto;
+            background: pink;
+        }
+
+        .contentTitle {
+            background-color: #efe5ca;
+            text-align: center;
+            margin: 1%;;
+            font-size: 30px;
+        }
+
+        .cardItem {
+            border: 1px solid gray;
+            border-radius: 5px;
+            margin: 1rem;
+            padding: 1rem;
+            width: 20%;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .card-text {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        /*.card-img-top {
+            width: 100%;
+            height: auto;
+        }*/
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="left">
+            <!--放圖片-->
+            <h1>果果小舖</h1>
+        </div>
+        <nav class="right">
+            <a href="AboutUs.html">關於我們</a>
+            <a href="Fruits.html">商品介紹</a>
+            <a href="Members.html">會員中心</a>
+            <a href="Cart.html">購物車</a>           
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class="content">
+                <div class="contentTitle">國產水果</div>
+                <hr>
+                <div id="localFruits" class="detail">
+                    <!-- 國產商品動態生成並插入到這裡 -->
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="content">
+                <div class="contentTitle">進口水果</div>
+                <hr>
+                <div id="importedFruits" class="detail">
+                    <!-- 進口商品動態生成並插入到這裡 -->
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="content">
+                <div class="contentTitle">其他商品</div>
+                <hr>
+                <div id="otherProducts" class="detail">
+                    <!-- 其他商品動態生成並插入到這裡 -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>果果小舖 © 2024</p>
+    </footer>
+
+    <script>
+        const itemObj = {
+            0: {category:'local',name: '卡蜜拉哈密瓜禮盒(單顆裝)', description: '樂事只選用當令新鮮馬鈴薯，鮮切成金黃香脆洋芋片；以剛剛好的調味與天然薯香搭成完美絕配。最好吃的樂事洋芋片，隨時享受簡單的快樂！', price: '25', img: 'chips.jpg'},
+            1: {category:'local',name: '愛文芒果/6入', description: '維力炸醬麵，麵體Q、料香濃，乾麵附湯一包兩吃，道地家鄉口味是全家大小百吃不厭的好口味！', price: '20', img: 'noodle.jpg'},
+            2: {category:'local',name: '茂谷柑禮盒(10顆裝)', description: '奶茶-獨特大麥香味讓人回味無窮', price: '15', img: 'milktea.jpg'},
+            3: {category:'local',name: '巨峰葡萄/5斤', description: '紅茶-獨特大麥香味讓人回味無窮', price: '15', img: 'blacktea.jpg'},
+            4: {category:'local',name: '金鑽鳳梨/4顆', description: '綠茶-獨特大麥香味讓人回味無窮', price: '15', img: 'greentea.jpg'},
+            5: {category:'local',name: '冠軍玉荷包/5斤', description: '綠茶-獨特大麥香味讓人回味無窮', price: '15', img: 'greentea.jpg'},
+            6: {category:'imported',name: '青森陽光富士蘋果/8入', description: '綠茶-獨特大麥香味讓人回味無窮', price: '15', img: 'greentea.jpg'},
+            7: {category:'imported',name: '紐西蘭黃金奇異果/18入', description: '綠茶-獨特大麥香味讓人回味無窮', price: '15', img: 'greentea.jpg'},
+        };
+        window.onload = function() {
+            generateItems();
+        };
+        function generateItems() {
+            let objLength = Object.keys(itemObj).length;
+            for(let i=0; i<objLength; i++) {
+                let item = itemObj[i.toString()];
+                if (item.category == 'local') {
+                    $("#localFruits").append(newCardItem(item));
+                } else if (item.category == 'imported') {
+                    $("#importedFruits").append(newCardItem(item));
+                } else {
+                    $("#otherProducts").append(newCardItem(item));
+                }
+            }
+        }
+        function newCardItem(item) {
+            let temp = '';
+            temp += '<a href="details.html?name=' + encodeURIComponent(item.name) + '&description=' + encodeURIComponent(item.description) 
+            +'&price=' + encodeURIComponent(item.price) + '&img=' + encodeURIComponent(item.img) + '">';
+            temp += '<div class="cardItem">';
+            temp += '  <img class="card-img-top" src="./img/' + item.img + '"></img>';
+            temp += '  <div class="card-body">';
+            temp += '    <p class="card-text" style="height: 1rem;">' + item.name + '</p>';
+            temp += '  </div>';
+            temp += '</div>';
+            return temp;
+        }
+    </script>
+</body>
+</html>
